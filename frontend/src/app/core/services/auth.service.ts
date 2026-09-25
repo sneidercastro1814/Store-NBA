@@ -15,15 +15,15 @@ export class AuthService {
   private currentUserSignal = signal<User | null>(this.loadStoredUser());
 
   readonly currentUser = this.currentUserSignal.asReadonly();
-  readonly isenticated = computed(() => !!this.currentUserSignal());
+  readonly isAuthenticated = computed(() => !!this.currentUserSignal());
   readonly isAdmin = computed(() => this.currentUserSignal()?.rol === 'ROLE_ADMIN');
 
-    login(credentials: { email: string; password: string }): Observable<AuthResponse> {
+  login(credentials: { email: string; password: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(res => this.handleAuthSuccess(res))
     );
   }
-    register(userData: { nombre: string; email: string; password: string }): Observable<AuthResponse> {
+  register(userData: { nombre: string; email: string; password: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData).pipe(
       tap(res => this.handleAuthSuccess(res))
     );
