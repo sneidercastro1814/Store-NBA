@@ -1,0 +1,205 @@
+/* ==========================================================================
+   HoopStore Global Styles - Official NBA Aesthetic
+   Colors: NBA Blue (#006BB6), NBA Red (#C9082A), White (#FFFFFF), Deep Navy (#0A0F1D)
+   ========================================================================== */
+
+:root {
+  --nba-blue: #006BB6;
+  --nba-blue-hover: #005594;
+  --nba-blue-glow: rgba(0, 107, 182, 0.4);
+  --nba-red: #C9082A;
+  --nba-red-hover: #a10621;
+  --nba-red-glow: rgba(201, 8, 42, 0.4);
+  --court-wood: #D9822B;
+  
+  --bg-primary: #070B14;
+  --bg-secondary: #0D1322;
+  --bg-card: rgba(18, 26, 45, 0.75);
+  --bg-card-hover: rgba(25, 36, 62, 0.85);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(0, 107, 182, 0.5);
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-blue: 0 10px 25px rgba(0, 107, 182, 0.35);
+  --shadow-red: 0 10px 25px rgba(201, 8, 42, 0.35);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 107, 182, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(201, 8, 42, 0.1) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-heading);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+/* ==========================================================================
+   Utility Classes & Component Bases
+   ========================================================================== */
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--nba-blue) 0%, #004d80 100%);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-blue);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 107, 182, 0.5);
+    background: linear-gradient(135deg, #027ad0 0%, #005594 100%);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--nba-red) 0%, #90041d 100%);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-red);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(201, 8, 42, 0.5);
+    background: linear-gradient(135deg, #e30a32 0%, #a10621 100%);
+  }
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  &.badge-nba {
+    background: rgba(0, 107, 182, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(0, 107, 182, 0.4);
+  }
+
+  &.badge-fiba {
+    background: rgba(201, 8, 42, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(201, 8, 42, 0.4);
+  }
+
+  &.badge-euroleague {
+    background: rgba(217, 130, 43, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(217, 130, 43, 0.4);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nba-blue);
+}
