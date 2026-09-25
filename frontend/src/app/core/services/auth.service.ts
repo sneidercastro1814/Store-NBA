@@ -1,6 +1,6 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, catchError, of, throwError } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { AuthResponse, User } from '../models/user.model';
 
 @Injectable({
@@ -8,56 +8,24 @@ import { AuthResponse, User } from '../models/user.model';
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = 'https://store-nba-production.up.railway.app/api/auth';
   private TOKEN_KEY = 'hoopstore_jwt_token';
   private USER_KEY = 'hoopstore_user';
 
   private currentUserSignal = signal<User | null>(this.loadStoredUser());
 
   readonly currentUser = this.currentUserSignal.asReadonly();
-  readonly isAuthenticated = computed(() => !!this.currentUserSignal());
+  readonly isenticated = computed(() => !!this.currentUserSignal());
   readonly isAdmin = computed(() => this.currentUserSignal()?.rol === 'ROLE_ADMIN');
 
-  login(credentials: { email: string; password: string }): Observable<AuthResponse> {
+    login(credentials: { email: string; password: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(res => this.handleAuthSuccess(res)),
-      catchError(err => {
-        // Fallback para testing si el backend local no está corriendo
-        if (err.status === 0 || err.status === 404) {
-          const mockRes: AuthResponse = {
-            token: 'mock-jwt-token-nba-mvp-2024',
-            type: 'Bearer',
-            id: 1,
-            nombre: credentials.email.includes('admin') ? 'Administrador NBA' : 'LeBron Fan',
-            email: credentials.email,
-            rol: credentials.email.includes('admin') ? 'ROLE_ADMIN' : 'ROLE_USER'
-          };
-          this.handleAuthSuccess(mockRes);
-          return of(mockRes);
-        }
-        return throwError(() => err);
-      })
+      tap(res => this.handleAuthSuccess(res))
     );
   }
-
-  register(userData: { nombre: string; email: string; password: string }): Observable<AuthResponse> {
+    register(userData: { nombre: string; email: string; password: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData).pipe(
-      tap(res => this.handleAuthSuccess(res)),
-      catchError(err => {
-        if (err.status === 0 || err.status === 404) {
-          const mockRes: AuthResponse = {
-            token: 'mock-jwt-token-registered-hoops',
-            type: 'Bearer',
-            id: Date.now(),
-            nombre: userData.nombre,
-            email: userData.email,
-            rol: 'ROLE_USER'
-          };
-          this.handleAuthSuccess(mockRes);
-          return of(mockRes);
-        }
-        return throwError(() => err);
-      })
+      tap(res => this.handleAuthSuccess(res))
     );
   }
 

@@ -15,7 +15,7 @@ RUN mvn clean package -DskipTests
 # ----------------------------------------------------
 # Etapa 2: Runtime ligero
 # ----------------------------------------------------
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 RUN addgroup -S spring && adduser -S spring -G spring

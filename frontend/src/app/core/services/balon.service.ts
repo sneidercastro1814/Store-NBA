@@ -10,7 +10,7 @@ import { Equipo } from '../models/equipo.model';
 })
 export class BalonService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = 'https://store-nba-production.up.railway.app/api';
 
   private mockBalones: Balon[] = [
     {
